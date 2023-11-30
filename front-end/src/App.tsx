@@ -1,26 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import {
+  NotesPage,
+  RegisterNotePage,
+  RegisterUserPage,
+  UsersPage,
+} from "./pages";
+import { Heading } from "@chakra-ui/react";
 
-function App() {
+export const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<UsersPage />} />
+        <Route path="/register-note">
+          <Route index element={<RegisterNotePage />} />
+          <Route path=":userId" element={<RegisterNotePage />} />
+        </Route>
+        <Route path="notes" element={<NotesPage />} />
+        <Route path="register-user" element={<RegisterUserPage />} />
+        <Route path="*" element={<Heading>Page not found</Heading>} />
+      </Routes>
+    </BrowserRouter>
   );
-}
-
-export default App;
+};
